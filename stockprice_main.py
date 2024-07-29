@@ -53,18 +53,22 @@ if bt:
     st.header("Data We collected from the source")
     st.write(df)
 
-    reliance_1=df.drop(["Adj Close"],axis=1).reset_index(drop=True)
+    reliance_1=df.drop([["Adj Close","Open","High","Volume","Low"]],axis=1).reset_index(drop=True)
     reliance_2=reliance_1.dropna().reset_index(drop=True)
 
     reliance=reliance_2.copy()
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
     reliance=reliance.set_index('Date')
     st.title('EDA')
+
+    
     st.write(reliance)
     df1 = pd.DataFrame(future_predicted_values)
     st.markdown("### Next 30 days forecast")
     df1.rename(columns={0: "Predicted Prices"}, inplace=True)
     st.write(df1)
+
+    
 
     st.markdown("### Original vs predicted close price")
     fig= plt.figure(figsize=(20,10))
