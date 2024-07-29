@@ -38,13 +38,13 @@ def create_model(df):
     # Model building
     tf.keras.backend.clear_session()
     model=Sequential()
-    model.add(LSTM(20,return_sequences=True,input_shape=(time_step,1)))
-    model.add(LSTM(22,return_sequences=True))
-    model.add(LSTM(22))
+    model.add(LSTM(32,return_sequences=True,input_shape=(time_step,1)))
+    model.add(LSTM(32,return_sequences=True))
+    model.add(LSTM(32))
     model.add(Dense(1))
     optimizer = tf.keras.optimizers.Adam()
     model.compile(loss='mean_squared_error',optimizer=optimizer)
-    model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=10,batch_size=32,verbose=1)
+    model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=15,batch_size=32,verbose=1)
 
     ### Lets Do the prediction and check performance metrics
     train_predict=model.predict(X_train)
