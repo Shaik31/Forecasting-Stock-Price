@@ -6,6 +6,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import LSTM, GRU
 from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras.optimizers import adam
 
 # convert an array of values into a dataset matrix
 def create_dataset(dataset, time_step=8):
@@ -21,7 +22,7 @@ def create_model(df):
     scaler=MinMaxScaler(feature_range=(0,1))
     closedf=scaler.fit_transform(np.array(df['Close']).reshape(-1,1))
 
-    training_size=int(len(closedf)*0.75)
+    training_size=int(len(closedf)*0.86)
     test_size=len(closedf)-training_size
     train_data,test_data=closedf[0:training_size,:],closedf[training_size:len(closedf),:1]
 
@@ -43,7 +44,7 @@ def create_model(df):
     model.add(LSTM(22))
     model.add(Dense(1))
     optimizer = tf.keras.optimizers.Adam()
-    model.compile(loss='mean_squared_error',optimizer=optimizer)
+    model.compile(loss='mean_squared_error',optimizer='adam')
     model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=50,batch_size=32,verbose=1)
 
     ### Lets Do the prediction and check performance metrics
