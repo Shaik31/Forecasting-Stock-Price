@@ -61,7 +61,7 @@ if bt:
     reliance=reliance.set_index('Date')
     st.title('Forecast')
 
-    st.set_option('deprecation.showPyplotGlobalUse', False)
+
     st.title('Close Stock Price Original')
     plt.figure(figsize=(20,10))
     sns.lineplot(reliance['Close'],color='red')
