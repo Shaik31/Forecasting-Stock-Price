@@ -6,10 +6,9 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import LSTM, GRU
 from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.optimizers import adam
 
 # convert an array of values into a dataset matrix
-def create_dataset(dataset, time_step=8):
+def create_dataset(dataset, time_step=2):
     dataX, dataY = [], []
     for i in range(len(dataset)-time_step-1):
         a = dataset[i:(i+time_step), 0]   ###i=0, 0,1,2,3-----99   100 
