@@ -33,7 +33,7 @@ import pickle
 
 with st.sidebar:
     st.markdown("# Reliance Stock Market Prediction")
-    user_input = st.multiselect('Please select the stock',['RELIANCE.NS'],['RELIANCE.NS'])
+    user_input = st.multiselect('Please select the stock',['RELIANCE'])
 
     # user_input = st.text_input('Enter Stock Name', "ADANIENT.NS")
     #st.markdown("### Choose Date for your anaylsis")
@@ -53,13 +53,15 @@ if bt:
     st.header("Data We collected from the source")
     st.write(df)
 
-    reliance_1=df.drop([["Adj Close","Open","High","Volume","Low"]],axis=1).reset_index(drop=True)
+    st.plotly(x=df['Date'],y=df['Close'])
+
+    reliance_1=df.drop(["Adj Close"],axis=1).reset_index(drop=True)
     reliance_2=reliance_1.dropna().reset_index(drop=True)
 
     reliance=reliance_2.copy()
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
     reliance=reliance.set_index('Date')
-    st.title('EDA')
+    st.title('Forecast')
 
     
     st.write(reliance)
