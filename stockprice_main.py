@@ -50,7 +50,6 @@ if bt:
     plotdf, future_predicted_values =m.create_model(df)
     df.reset_index(inplace = True)
     st.title('Reliance Stock Market Prediction')
-    st.header("Data We collected from the source")
     st.write(df)
 
     reliance_1=df.drop(["Adj Close"],axis=1).reset_index(drop=True)
@@ -60,10 +59,10 @@ if bt:
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
     reliance=reliance.set_index('Date')
     st.title('Forecast')
+    
 
-
-    st.title('Close Stock Price Original')
     plt.figure(figsize=(20,10))
+    st.title('Close Stock Price Original')
     sns.lineplot(reliance['Close'],color='red')
     plt.xlabel('Date')
     plt.ylabel=('Close Stock Price')
