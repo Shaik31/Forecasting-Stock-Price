@@ -53,11 +53,6 @@ if bt:
     st.header("Data We collected from the source")
     st.write(df)
 
-    st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.title('Visualizations')
-    plt.figure(figsize=(20,10))
-    sns.lineplot(df.index,df['Close'])
-
     reliance_1=df.drop(["Adj Close"],axis=1).reset_index(drop=True)
     reliance_2=reliance_1.dropna().reset_index(drop=True)
 
@@ -66,15 +61,20 @@ if bt:
     reliance=reliance.set_index('Date')
     st.title('Forecast')
 
-    
-    st.write(reliance)
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.title('Close Stock Price Original')
+    plt.figure(figsize=(20,10))
+    sns.lineplot(reliance['Close'],color='red')
+    plt.xlabel('Date')
+    plt.ylabel=('Close Stock Price')
+
+    st.write('Forecast')
     df1 = pd.DataFrame(future_predicted_values)
     st.markdown("### Next 30 days forecast")
     df1.rename(columns={0: "Predicted Prices"}, inplace=True)
     st.write(df1)
 
     
-
     st.markdown("### Original vs predicted close price")
     fig= plt.figure(figsize=(20,10))
     sns.lineplot(data=plotdf)
