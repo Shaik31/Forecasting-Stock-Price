@@ -53,7 +53,10 @@ if bt:
     st.header("Data We collected from the source")
     st.write(df)
 
-    st.plotly(x=df['Date'],y=df['Close'])
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.title('Visualizations')
+    plt.figure(figsize=(20,10))
+    sns.lineplot(df.index,df['Close'])
 
     reliance_1=df.drop(["Adj Close"],axis=1).reset_index(drop=True)
     reliance_2=reliance_1.dropna().reset_index(drop=True)
