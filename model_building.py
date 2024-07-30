@@ -21,7 +21,7 @@ def create_model(df):
     scaler=MinMaxScaler(feature_range=(0,1))
     closedf=scaler.fit_transform(np.array(df['Close']).reshape(-1,1))
 
-    training_size=int(len(closedf)*0.86)
+    training_size=int(len(closedf)*0.85)
     test_size=len(closedf)-training_size
     train_data,test_data=closedf[0:training_size,:],closedf[training_size:len(closedf),:1]
 
