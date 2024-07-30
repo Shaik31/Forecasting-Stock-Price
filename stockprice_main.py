@@ -58,14 +58,7 @@ if bt:
     reliance=reliance_2.copy()
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
     reliance=reliance.set_index('Date')
-    st.title('Forecast')
     
-
-    plt.figure(figsize=(20,10))
-    st.title('Close Stock Price Original')
-    sns.lineplot(reliance['Close'],color='red')
-    plt.xlabel('Date')
-    plt.ylabel=('Close Stock Price')
 
     st.write('Forecast')
     df1 = pd.DataFrame(future_predicted_values)
