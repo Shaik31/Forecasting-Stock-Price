@@ -52,7 +52,7 @@ if bt:
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
     reliance=reliance.set_index('Date')
     df = reliance.copy()
-    plotdf, future_predicted_values,plotdfnew =m.create_model(df)
+    plotdf,future_predicted_values,plotdfnew =m.create_model(df)
     df.reset_index(inplace = True)
     st.title('Reliance Stock Market Prediction')
     st.write(df)
