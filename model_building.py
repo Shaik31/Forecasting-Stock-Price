@@ -36,7 +36,7 @@ def create_model(df):
     X_test = X_test.reshape(X_test.shape[0],X_test.shape[1] , 1)
 
     # Model building
-    tf.keras.backend.clear_session()
+    #tf.keras.backend.clear_session()
     model=Sequential()
     model.add(LSTM(32,return_sequences=True,input_shape=(time_step,1)))
     model.add(LSTM(32,return_sequences=True))
