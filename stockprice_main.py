@@ -47,7 +47,7 @@ if bt:
 # Importing dataset------------------------------------------------------
     #df = yf.download('RELIANCE.NS', start=START, end=END)
     df = pd.read_csv('Relaince_stock.csv')
-    data = df.filter(['Close']).values
+    data = df.dropna(inplace=True)
     plotdf, future_predicted_values =m.create_model(data)
     df.reset_index(inplace = True)
     st.title('Reliance Stock Market Prediction')
