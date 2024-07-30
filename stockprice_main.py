@@ -47,9 +47,7 @@ if bt:
 # Importing dataset------------------------------------------------------
     #df = yf.download('RELIANCE.NS', start=START, end=END)
     data= pd.read_csv('Relaince_stock.csv')
-
     reliance_2=data.dropna().reset_index(drop=True)
-
     reliance=reliance_2.copy()
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
     reliance=reliance.set_index('Date')
