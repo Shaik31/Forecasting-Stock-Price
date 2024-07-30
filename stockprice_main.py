@@ -57,26 +57,16 @@ if bt:
     st.title('Reliance Stock Market Prediction')
     st.write(df)
 
-    st.title('Original Close Price vs Date')
-    plt.plot(df['Close'],label='Original Data')
-    st.pyplot()
-
-
-   
     st.markdown("### Original vs predicted close price")
     fig= plt.figure(figsize=(20,10))
     sns.lineplot(data=plotdf)
     st.pyplot(fig)
     
-
     st.write('Forecast')
     df1 = pd.DataFrame(future_predicted_values)
     st.markdown("### Next 30 days forecast")
     df1.rename(columns={0: "Predicted Prices"}, inplace=True)
     st.write(df1)
-
-
-    
 
 else:
     #displayed when the button is unclicked
