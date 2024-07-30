@@ -26,7 +26,7 @@ def create_model(df):
     train_data,test_data=closedf[0:training_size,:],closedf[training_size:len(closedf),:1]
 
     # reshape into X=t,t+1,t+2,t+3 and Y=t+4
-    time_step = 15
+    time_step = 2
     X_train, y_train = create_dataset(train_data, time_step)
     X_test, y_test = create_dataset(test_data, time_step)
 
@@ -44,7 +44,7 @@ def create_model(df):
     model.add(Dense(1))
     optimizer = tf.keras.optimizers.Adam()
     model.compile(loss='mean_squared_error',optimizer=optimizer)
-    model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=15,batch_size=32,verbose=1)
+    model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=20,batch_size=32,verbose=1)
 
     ### Lets Do the prediction and check performance metrics
     train_predict=model.predict(X_train)
@@ -83,14 +83,16 @@ def create_model(df):
             x_input=np.array(temp_input[1:])
             x_input=x_input.reshape(1,-1)
             yhat = model.predict(np.expand_dims(x_input, 2))
-            temp_input.extend(yhat[0])
+            temp_input.extend(yhat[0].tolist())
             temp_input=temp_input[1:]
         
             lst_output.extend(yhat.tolist())
             i=i+1
             
         else:
-            yhat = model.predict(np.expand_dims(x_input, 2))
+            x_input = np.array(temp_input).reshape(1,-1,1)
+            yhat = model.predict(x_input)
+            #yhat = model.predict(np.expand_dims(x_input, 2))
             temp_input.extend(yhat[0])
             lst_output.extend(yhat.tolist())
             
