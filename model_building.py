@@ -4,7 +4,7 @@ from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import LSTM, GRU
+from tensorflow.keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 
 # convert an array of values into a dataset matrix
@@ -81,8 +81,9 @@ def create_model(df):
     while(i<pred_days):
         if(len(temp_input)>time_step):
             x_input=np.array(temp_input[1:])
-            x_input=x_input.reshape(1,-1)
-            yhat = model.predict(np.expand_dims(x_input, 2))
+            x_input=x_input.reshape(1,timestep,1)
+            
+            yhat = model.predict(x_input)
             temp_input.extend(yhat[0].tolist())
             temp_input=temp_input[1:]
         
