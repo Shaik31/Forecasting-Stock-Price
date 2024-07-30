@@ -59,8 +59,6 @@ if bt:
 
     st.title('Original Close Price vs Date')
     plt.plot(df['Close'],label='Original Data')
-    plt.xlabel('Date')
-    plt.ylabel('Close Price')
     st.pyplot()
 
 
