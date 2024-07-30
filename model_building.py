@@ -81,7 +81,7 @@ def create_model(df):
     while(i<pred_days):
         if(len(temp_input)>time_step):
             x_input=np.array(temp_input[1:])
-            x_input=x_input.reshape(1,timestep,1)
+            x_input=x_input.reshape(1,time_step,1)
             
             yhat = model.predict(x_input)
             temp_input.extend(yhat[0].tolist())
