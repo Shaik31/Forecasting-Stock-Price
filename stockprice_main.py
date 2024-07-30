@@ -66,6 +66,8 @@ if bt:
     st.markdown("### Next 30 days forecast")
     df1.rename(columns={0: "Predicted Prices"}, inplace=True)
     st.write(df1)
+    dates = np.arange(1,31)
+    st.pyplot(dates,future_predicted_values)
 
     
     st.markdown("### Original vs predicted close price")
