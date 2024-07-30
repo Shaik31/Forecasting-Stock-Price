@@ -99,4 +99,5 @@ def create_model(df):
             
             i=i+1
     next_predicted_days_value = scaler.inverse_transform(np.array(lst_output).reshape(-1,1)).reshape(1,-1).tolist()[0]
-    return plotdf,pd.DataFrame(next_predicted_days_value)
+    plotdfnew = pd.DataFrame({'Date': np.arange(1,31).tolist(),'next predicted days values': next_predicted_days_value})
+    return plotdf,pd.DataFrame(next_predicted_days_value),plotdfnew
