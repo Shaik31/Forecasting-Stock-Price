@@ -59,6 +59,11 @@ if bt:
     reliance=reliance_2.copy()
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
     reliance=reliance.set_index('Date')
+
+    st.markdown("### Original vs predicted close price")
+    fig= plt.figure(figsize=(20,10))
+    sns.lineplot(data=plotdf)
+    st.pyplot(fig)
     
 
     st.write('Forecast')
@@ -66,14 +71,10 @@ if bt:
     st.markdown("### Next 30 days forecast")
     df1.rename(columns={0: "Predicted Prices"}, inplace=True)
     st.write(df1)
-    dates = np.arange(1,31)
-    st.pyplot(dates,future_predicted_values)
+
 
     
-    st.markdown("### Original vs predicted close price")
-    fig= plt.figure(figsize=(20,10))
-    sns.lineplot(data=plotdf)
-    st.pyplot(fig)
+
 else:
     #displayed when the button is unclicked
  st.write('Please click on the submit button to get the EDA ans Prediction') 
