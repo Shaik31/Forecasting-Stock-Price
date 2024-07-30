@@ -70,7 +70,7 @@ if bt:
 
     st.markdown("Forecasted Price for 30 Days")
     fig= plt.figure(figsize=(20,10))
-    sns.lineplot(data=plotdf)
+    sns.lineplot(data=plotdfnew)
     st.pyplot(fig)
 
 else:
