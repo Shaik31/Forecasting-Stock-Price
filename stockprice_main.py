@@ -58,7 +58,7 @@ if bt:
     st.write(df)
 
     st.title('Original Close Price vs Date')
-    plt.plot(df.index,df['Close'],label='Original Data')
+    plt.plot(df['Close'],label='Original Data')
     plt.xlabel('Date')
     plt.ylabel('Close Price')
     st.pyplot()
