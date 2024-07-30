@@ -47,7 +47,14 @@ if bt:
 # Importing dataset------------------------------------------------------
     #df = yf.download('RELIANCE.NS', start=START, end=END)
     data= pd.read_csv('Relaince_stock.csv')
-    df = data.dropna()
+
+    reliance_1=data.drop(["Adj Close"],axis=1).reset_index(drop=True)
+    reliance_2=reliance_1.dropna().reset_index(drop=True)
+
+    reliance=reliance_2.copy()
+    reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
+    reliance=reliance.set_index('Date')
+    df = reliance.copy()
     plotdf, future_predicted_values =m.create_model(df)
     df.reset_index(inplace = True)
     st.title('Reliance Stock Market Prediction')
