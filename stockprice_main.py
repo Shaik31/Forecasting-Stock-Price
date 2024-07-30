@@ -68,6 +68,11 @@ if bt:
     df1.rename(columns={0: "Predicted Prices"}, inplace=True)
     st.write(df1)
 
+    st.markdown("Forecasted Price for 30 Days")
+    fig= plt.figure(figsize=(20,10))
+    sns.lineplot(data=plotdf)
+    st.pyplot(fig)
+
 else:
     #displayed when the button is unclicked
  st.write('Please click on the submit button to get the EDA ans Prediction') 
