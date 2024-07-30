@@ -48,8 +48,7 @@ if bt:
     #df = yf.download('RELIANCE.NS', start=START, end=END)
     data= pd.read_csv('Relaince_stock.csv')
 
-    reliance_1=data.drop(["Adj Close"],axis=1).reset_index(drop=True)
-    reliance_2=reliance_1.dropna().reset_index(drop=True)
+    reliance_2=data.dropna().reset_index(drop=True)
 
     reliance=reliance_2.copy()
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
@@ -60,13 +59,14 @@ if bt:
     st.title('Reliance Stock Market Prediction')
     st.write(df)
 
-    reliance_1=df.drop(["Adj Close"],axis=1).reset_index(drop=True)
-    reliance_2=reliance_1.dropna().reset_index(drop=True)
+    st.title('Original Close Price vs Date')
+    plt.plot(df.index,df['Close'],label='Original Data')
+    plt.xlabel('Date')
+    plt.ylabel('Close Price')
+    st.pyplot()
 
-    reliance=reliance_2.copy()
-    reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
-    reliance=reliance.set_index('Date')
 
+   
     st.markdown("### Original vs predicted close price")
     fig= plt.figure(figsize=(20,10))
     sns.lineplot(data=plotdf)
