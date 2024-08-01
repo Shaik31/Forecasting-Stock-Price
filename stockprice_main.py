@@ -40,7 +40,7 @@ if bt:
     bt60 = st.button('60 Days')
     bt90 = st.button('90 Days')
 
-    elif bt30:
+    if bt30:
         next_predicted_days_value30,plotdf30=m.create_model(df)
         st.write('Forecast')
         df30 = pd.DataFrame(next_predicted_days_value30)
