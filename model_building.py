@@ -8,7 +8,7 @@ from tensorflow.keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 
 # convert an array of values into a dataset matrix
-def create_dataset(dataset, time_step=2):
+def create_dataset(dataset, time_step=15):
     dataX, dataY = [], []
     for i in range(len(dataset)-time_step-1):
         a = dataset[i:(i+time_step), 0]   ###i=0, 0,1,2,3-----99   100 
@@ -99,8 +99,8 @@ def create_model(df):
             lst_output30.extend(yhat.tolist())
             
             i=i+1
-    next_predicted_days_value = scaler.inverse_transform(np.array(lst_output30).reshape(-1,1)).reshape(1,-1).tolist()[0]
-    plotdf30 = pd.DataFrame({'next predicted days values': next_predicted_days_value})
+    next_predicted_days_value30 = scaler.inverse_transform(np.array(lst_output30).reshape(-1,1)).reshape(1,-1).tolist()[0]
+    plotdf30 = pd.DataFrame({'next predicted days values': next_predicted_days_value30})
 
     #60 days forecasting
     x_input=test_data[len(test_data)-time_step:].reshape(1,-1)
@@ -131,8 +131,8 @@ def create_model(df):
             lst_output60.extend(yhat.tolist())
             
             i=i+1
-    next_predicted_days_value = scaler.inverse_transform(np.array(lst_output60).reshape(-1,1)).reshape(1,-1).tolist()[0]
-    plotdf60 = pd.DataFrame({'next predicted days values': next_predicted_days_value})
+    next_predicted_days_value60 = scaler.inverse_transform(np.array(lst_output60).reshape(-1,1)).reshape(1,-1).tolist()[0]
+    plotdf60 = pd.DataFrame({'next predicted days values': next_predicted_days_value60})
 
     #90 days forecasting
     x_input=test_data[len(test_data)-time_step:].reshape(1,-1)
@@ -163,7 +163,7 @@ def create_model(df):
             lst_output90.extend(yhat.tolist())
             
             i=i+1
-    next_predicted_days_value = scaler.inverse_transform(np.array(lst_output90).reshape(-1,1)).reshape(1,-1).tolist()[0]
-    plotdf90 = pd.DataFrame({'next predicted days values': next_predicted_days_value})
-    return plotdf,pd.DataFrame(next_predicted_days_value),plotdf30,plotdf60,plotdf90
+    next_predicted_days_value90 = scaler.inverse_transform(np.array(lst_output90).reshape(-1,1)).reshape(1,-1).tolist()[0]
+    plotdf90 = pd.DataFrame({'next predicted days values': next_predicted_days_value90})
+    return plotdf,pd.DataFrame(next_predicted_days_value30),pd.DataFrame(next_predicted_days_value60),pd.DataFrame(next_predicted_days_value90),plotdf30,plotdf60,plotdf90
 
