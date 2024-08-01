@@ -1,25 +1,4 @@
 
-'''import pandas as pd
-import pickle
-#import seaborn as sns
-#import matplotlib.pyplot as plt
-import streamlit as st
-
-
-model = pickle.load(open('lstm_model.pkl','rb'))
-
-st.title('Relaince Stock Price Prediction')
-user_input = st.multiselect('Please select the stock',['RELIANCE'])
-bt = st.button('Submit') 
-
-if bt:
-    st.subheader("Raw Data")
-    df = pd.read_csv('C:/Users/Admin/Relaince_stock.csv')
-    st.dataframe(df)
-    st.subheader("plotting the data")
-    st.pyplot(df['Date'],df['Close'])'''
-
-
 import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
@@ -31,15 +10,9 @@ import model_building as m
 import pickle
 
 
-with st.sidebar:
-    st.markdown("# Reliance Stock Market Prediction")
-    user_input = st.multiselect('Please select the stock',['RELIANCE'])
-
-    # user_input = st.text_input('Enter Stock Name', "ADANIENT.NS")
-    #st.markdown("### Choose Date for your anaylsis")
-    #START = st.date_input("From",datetime.date(2015, 1, 1))
-    #END = st.date_input("To",datetime.date(2023, 2, 28))
-    bt = st.button('Submit') 
+st.markdown("# Reliance Stock Market Prediction")
+user_input = st.multiselect('Please select the stock',['RELIANCE'])
+bt = st.button('Submit') 
 
 #adding a button
 if bt:
