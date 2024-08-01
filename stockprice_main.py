@@ -42,14 +42,47 @@ if bt:
 
     if bt30:
          st.write('Forecast')
-         df1 = pd.DataFrame(future_predicted_values)
+         df30 = pd.DataFrame(next_predicted_days_value30)
          st.markdown("### Next 30 days forecast")
-         df1.rename(columns={0: "Predicted Prices"}, inplace=True)
-         st.write(df1)
+         df30.rename(columns={0: "Predicted Prices"}, inplace=True)
+         st.write(df30)
 
          st.markdown("Forecasted Price for 30 Days")
          fig= plt.figure(figsize=(20,10))
          sns.lineplot(data=plotdf30)
+         st.pyplot(fig)
+    
+   
+    else:
+         st.write('Please select days to predict')
+
+    if bt60:
+         st.write('Forecast')
+         df60 = pd.DataFrame(next_predicted_days_value60)
+         st.markdown("### Next 30 days forecast")
+         df60.rename(columns={0: "Predicted Prices"}, inplace=True)
+         st.write(df30)
+
+         st.markdown("Forecasted Price for 60 Days")
+         fig= plt.figure(figsize=(20,10))
+         sns.lineplot(data=plotdf60)
+         st.pyplot(fig)
+    
+   
+    else:
+         st.write('Please select days to predict')
+
+
+    if bt30:
+         st.write('Forecast')
+         df90 = pd.DataFrame(next_predicted_days_value90)
+         st.markdown("### Next 30 days forecast")
+         df90.rename(columns={0: "Predicted Prices"}, inplace=True)
+         st.write(df30)
+
+         st.markdown("Forecasted Price for 90 Days")
+         fig= plt.figure(figsize=(20,10))
+         sns.lineplot(data=plotdf90)
          st.pyplot(fig)
     
    
