@@ -19,8 +19,6 @@ if 'df' not in st.session_state:
 def handle_forecast_button(days):
     st.session_state.forecast_days = days
 
-user_input = st.multiselect('Please select the stock', ['RELIANCE'])
-
 # Load data and create the model if the Submit button is clicked
 if st.button('Submit'):
     # Importing dataset
@@ -34,6 +32,7 @@ if st.button('Submit'):
     st.session_state.df = df
 
     # Generate and display the model
+    #plotdf = m.create_model(df)
     plotdf,next_predicted_days_value30,next_predicted_days_value60,next_predicted_days_value90,plotdf30,plotdf60,plotdf90= m.create_model(df)
     df.reset_index(inplace=True)
     st.session_state.data_loaded = True
@@ -68,7 +67,11 @@ if st.session_state.data_loaded:
     if st.session_state.forecast_days and st.session_state.df is not None:
         days = st.session_state.forecast_days
         df = st.session_state.df  # Retrieve the DataFrame from session state
-        next_predicted_days_value, plotdf = m.create_model(df, days=days)
+        next_predicted_days_value, plotdf = m.create_model(df)  # Call create_model without `days`
+        
+        # Here you should handle days separately, perhaps modify `next_predicted_days_value` based on `days`
+        # e.g., filter or process `next_predicted_days_value` to get forecast for `days`
+
         st.write(f'Forecast for {days} Days')
         df_forecast = pd.DataFrame(next_predicted_days_value, columns=["Predicted Prices"])
         st.write(df_forecast)
