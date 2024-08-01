@@ -51,7 +51,7 @@ if bt:
     df60 = pd.DataFrame(next_predicted_days_value60)
     st.markdown("### Next 30 days forecast")
     df60.rename(columns={0: "Predicted Prices"}, inplace=True)
-    st.write(df30)
+    st.write(df60)
 
     st.markdown("Forecasted Price for 60 Days")
     fig= plt.figure(figsize=(20,10))
@@ -64,7 +64,7 @@ if bt:
     df90 = pd.DataFrame(next_predicted_days_value90)
     st.markdown("### Next 30 days forecast")
     df90.rename(columns={0: "Predicted Prices"}, inplace=True)
-    st.write(df30)
+    st.write(df60)
 
     st.markdown("Forecasted Price for 90 Days")
     fig= plt.figure(figsize=(20,10))
