@@ -18,7 +18,6 @@ def handle_forecast_button(days):
     st.session_state.forecast_days = days
 
 user_input = st.multiselect('Please select the stock', ['RELIANCE'])
-bt = st.button('Submit')
 
 # Load data and create the model if the Submit button is clicked
 if st.button('Submit'):
