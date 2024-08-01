@@ -7,7 +7,7 @@ import streamlit as st
 import sys
 import model_building as m
 import pickle
-
+import plotly
 
 st.markdown("# Reliance Stock Market Prediction")
 user_input = st.multiselect('Please select the stock',['RELIANCE'])
@@ -33,7 +33,7 @@ if bt:
     st.markdown("### Original vs predicted close price")
     fig= plt.figure(figsize=(20,10))
     sns.lineplot(data=plotdf)
-    st.pyplot(fig)
+    st.plotly(fig)
 
 
     st.write('Forecast')
