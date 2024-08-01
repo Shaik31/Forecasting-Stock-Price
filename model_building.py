@@ -8,7 +8,7 @@ from tensorflow.keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 
 # convert an array of values into a dataset matrix
-def create_dataset(dataset, time_step=2):
+def create_dataset(dataset, time_step=15):
     dataX, dataY = [], []
     for i in range(len(dataset)-time_step-1):
         a = dataset[i:(i+time_step), 0]   ###i=0, 0,1,2,3-----99   100 
@@ -26,7 +26,7 @@ def create_model(df):
     train_data,test_data=closedf[0:training_size,:],closedf[training_size:len(closedf),:1]
 
     # reshape into X=t,t+1,t+2,t+3 and Y=t+4
-    time_step = 2
+    time_step = 15
     X_train, y_train = create_dataset(train_data, time_step)
     X_test, y_test = create_dataset(test_data, time_step)
 
@@ -44,7 +44,7 @@ def create_model(df):
     model.add(Dense(1))
     optimizer = tf.keras.optimizers.Adam()
     model.compile(loss='mean_squared_error',optimizer=optimizer)
-    model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=10,batch_size=32,verbose=1)
+    model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=5,batch_size=32,verbose=1)
 
     ### Lets Do the prediction and check performance metrics
     train_predict=model.predict(X_train)
