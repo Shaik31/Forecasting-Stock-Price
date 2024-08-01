@@ -34,7 +34,7 @@ if st.button('Submit'):
     st.session_state.df = df
 
     # Generate and display the model
-    plotdf = m.create_model(df)
+    plotdf,next_predicted_days_value30,next_predicted_days_value60,next_predicted_days_value90,plotdf30,plotdf60,plotdf90= m.create_model(df)
     df.reset_index(inplace=True)
     st.session_state.data_loaded = True
 
