@@ -19,7 +19,7 @@ if bt:
     df = reliance.copy()
 
     # Generate and display the model
-    plotdf = m.create_model(df)
+    plotdf,next_predicted_days_value30,next_predicted_days_value60,next_predicted_days_value90,plotdf30,plotdf60,plotdf90 = m.create_model(df)
     df.reset_index(inplace=True)
     st.title('Reliance Stock Market Prediction')
     st.write(df)
@@ -37,7 +37,7 @@ if bt:
 
     # Handle button clicks for forecast prediction
     if bt30:
-        next_predicted_days_value30, plotdf30 = m.create_model(df, days=30)
+        #next_predicted_days_value30, plotdf30 = m.create_model(df, days=30)
         st.write('Forecast for 30 Days')
         df30 = pd.DataFrame(next_predicted_days_value30, columns=["Predicted Prices"])
         st.write(df30)
@@ -48,7 +48,7 @@ if bt:
         st.pyplot(fig)
 
     elif bt60:
-        next_predicted_days_value60, plotdf60 = m.create_model(df, days=60)
+        #next_predicted_days_value60, plotdf60 = m.create_model(df, days=60)
         st.write('Forecast for 60 Days')
         df60 = pd.DataFrame(next_predicted_days_value60, columns=["Predicted Prices"])
         st.write(df60)
@@ -59,7 +59,7 @@ if bt:
         st.pyplot(fig)
 
     elif bt90:
-        next_predicted_days_value90, plotdf90 = m.create_model(df, days=90)
+        #next_predicted_days_value90, plotdf90 = m.create_model(df, days=90)
         st.write('Forecast for 90 Days')
         df90 = pd.DataFrame(next_predicted_days_value90, columns=["Predicted Prices"])
         st.write(df90)
