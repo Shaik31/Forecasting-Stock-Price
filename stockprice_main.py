@@ -40,20 +40,21 @@ if bt:
     bt60 = st.button('60 Days')
     bt90 = st.button('90 Days')
 
-if bt30:
-    
-    st.write('Forecast')
-    df1 = pd.DataFrame(future_predicted_values)
-    st.markdown("### Next 30 days forecast")
-    df1.rename(columns={0: "Predicted Prices"}, inplace=True)
-    st.write(df1)
+    if bt30:
+         st.write('Forecast')
+         df1 = pd.DataFrame(future_predicted_values)
+         st.markdown("### Next 30 days forecast")
+         df1.rename(columns={0: "Predicted Prices"}, inplace=True)
+         st.write(df1)
 
-    st.markdown("Forecasted Price for 30 Days")
-    fig= plt.figure(figsize=(20,10))
-    sns.lineplot(data=plotdfnew)
-    st.pyplot(fig)
-else:
-    st.write('Please select days to predict')
+         st.markdown("Forecasted Price for 30 Days")
+         fig= plt.figure(figsize=(20,10))
+         sns.lineplot(data=plotdfnew)
+         st.pyplot(fig)
+    
+   
+    else:
+         st.write('Please select days to predict')
 
 
 
