@@ -12,7 +12,7 @@ bt = st.button('Submit')
 # Check if the submit button is clicked
 if bt:
     # Importing dataset
-    data = pd.read_csv('Reliance_stock.csv')
+    data = pd.read_csv('Relaince_stock.csv')
     reliance = data.dropna().reset_index(drop=True)
     reliance['Date'] = pd.to_datetime(reliance['Date'], format='%Y-%m-%d')
     reliance = reliance.set_index('Date')
