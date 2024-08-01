@@ -7,11 +7,13 @@ import model_building as m
 # Set up the Streamlit app
 st.markdown("# Reliance Stock Market Prediction")
 
-# Initialize session state for tracking buttons
+# Initialize session state for tracking data and forecast settings
 if 'data_loaded' not in st.session_state:
     st.session_state.data_loaded = False
 if 'forecast_days' not in st.session_state:
     st.session_state.forecast_days = None
+if 'df' not in st.session_state:
+    st.session_state.df = None
 
 # Function to handle button clicks and update session state
 def handle_forecast_button(days):
@@ -28,8 +30,11 @@ if st.button('Submit'):
     reliance = reliance.set_index('Date')
     df = reliance.copy()
 
+    # Save DataFrame to session state
+    st.session_state.df = df
+
     # Generate and display the model
-    plotdf,next_predicted_days_value30,next_predicted_days_value60,next_predicted_days_value90,plotdf30,plotdf60,plotdf90 = m.create_model(df)
+    plotdf = m.create_model(df)
     df.reset_index(inplace=True)
     st.session_state.data_loaded = True
 
@@ -50,21 +55,19 @@ if st.session_state.data_loaded:
     with col1:
         if st.button('30 Days'):
             handle_forecast_button(30)
-            st.session_state.forecast_days = 30
 
     with col2:
         if st.button('60 Days'):
             handle_forecast_button(60)
-            st.session_state.forecast_days = 60
 
     with col3:
         if st.button('90 Days'):
             handle_forecast_button(90)
-            st.session_state.forecast_days = 90
 
     # Display forecast based on session state
-    if st.session_state.forecast_days:
+    if st.session_state.forecast_days and st.session_state.df is not None:
         days = st.session_state.forecast_days
+        df = st.session_state.df  # Retrieve the DataFrame from session state
         next_predicted_days_value, plotdf = m.create_model(df, days=days)
         st.write(f'Forecast for {days} Days')
         df_forecast = pd.DataFrame(next_predicted_days_value, columns=["Predicted Prices"])
