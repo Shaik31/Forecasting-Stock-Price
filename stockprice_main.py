@@ -31,7 +31,7 @@ if bt:
     st.write(df)
 
     st.markdown("### Original vs predicted close price")
-    fig= plt.figure(figsize=(20,10))
+    fig= plt.figure()
     sns.lineplot(data=plotdf)
     st.plotly_chart(fig)
 
