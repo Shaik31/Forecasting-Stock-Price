@@ -35,6 +35,13 @@ if bt:
     sns.lineplot(data=plotdf)
     st.pyplot(fig)
     
+    st.write('select the days to predict')
+    bt30 = st.button('30 Days')
+    bt60 = st.button('60 Days')
+    bt90 = st.button('90 Days')
+
+if bt30:
+    
     st.write('Forecast')
     df1 = pd.DataFrame(future_predicted_values)
     st.markdown("### Next 30 days forecast")
@@ -45,6 +52,10 @@ if bt:
     fig= plt.figure(figsize=(20,10))
     sns.lineplot(data=plotdfnew)
     st.pyplot(fig)
+else:
+    st.write('Please select days to predict')
+
+
 
 else:
     #displayed when the button is unclicked
