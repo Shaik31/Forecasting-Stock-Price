@@ -8,7 +8,7 @@ from tensorflow.keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 
 # convert an array of values into a dataset matrix
-def create_dataset(dataset, time_step=15):
+def create_dataset(dataset, time_step=2):
     dataX, dataY = [], []
     for i in range(len(dataset)-time_step-1):
         a = dataset[i:(i+time_step), 0]   ###i=0, 0,1,2,3-----99   100 
@@ -74,8 +74,9 @@ def create_model(df):
     temp_input=list(x_input)
     temp_input=temp_input[0].tolist()
     from numpy import array
-    lst_output=[]
+    lst_output30=[]
     
+    #30 days forecasting
     i=0
     pred_days = 30
     while(i<pred_days):
@@ -87,7 +88,7 @@ def create_model(df):
             temp_input.extend(yhat[0].tolist())
             temp_input=temp_input[1:]
         
-            lst_output.extend(yhat.tolist())
+            lst_output30.extend(yhat.tolist())
             i=i+1
             
         else:
@@ -95,9 +96,74 @@ def create_model(df):
             yhat = model.predict(x_input)
             #yhat = model.predict(np.expand_dims(x_input, 2))
             temp_input.extend(yhat[0])
-            lst_output.extend(yhat.tolist())
+            lst_output30.extend(yhat.tolist())
             
             i=i+1
-    next_predicted_days_value = scaler.inverse_transform(np.array(lst_output).reshape(-1,1)).reshape(1,-1).tolist()[0]
-    plotdfnew = pd.DataFrame({'next predicted days values': next_predicted_days_value})
-    return plotdf,pd.DataFrame(next_predicted_days_value),plotdfnew
+    next_predicted_days_value = scaler.inverse_transform(np.array(lst_output30).reshape(-1,1)).reshape(1,-1).tolist()[0]
+    plotdf30 = pd.DataFrame({'next predicted days values': next_predicted_days_value})
+
+    #60 days forecasting
+    x_input=test_data[len(test_data)-time_step:].reshape(1,-1)
+    temp_input=list(x_input)
+    temp_input=temp_input[0].tolist()
+    from numpy import array
+    lst_output60=[]
+    
+    i=0
+    pred_days = 60
+    while(i<pred_days):
+        if(len(temp_input)>time_step):
+            x_input=np.array(temp_input[1:])
+            x_input=x_input.reshape(1,time_step,1)
+            
+            yhat = model.predict(x_input)
+            temp_input.extend(yhat[0].tolist())
+            temp_input=temp_input[1:]
+        
+            lst_output60.extend(yhat.tolist())
+            i=i+1
+            
+        else:
+            x_input = np.array(temp_input).reshape(1,-1,1)
+            yhat = model.predict(x_input)
+            #yhat = model.predict(np.expand_dims(x_input, 2))
+            temp_input.extend(yhat[0])
+            lst_output60.extend(yhat.tolist())
+            
+            i=i+1
+    next_predicted_days_value = scaler.inverse_transform(np.array(lst_output60).reshape(-1,1)).reshape(1,-1).tolist()[0]
+    plotdf60 = pd.DataFrame({'next predicted days values': next_predicted_days_value})
+
+    #90 days forecasting
+    x_input=test_data[len(test_data)-time_step:].reshape(1,-1)
+    temp_input=list(x_input)
+    temp_input=temp_input[0].tolist()
+    from numpy import array
+    lst_output90=[]
+    
+    i=0
+    pred_days = 90
+    while(i<pred_days):
+        if(len(temp_input)>time_step):
+            x_input=np.array(temp_input[1:])
+            x_input=x_input.reshape(1,time_step,1)
+            
+            yhat = model.predict(x_input)
+            temp_input.extend(yhat[0].tolist())
+            temp_input=temp_input[1:]
+        
+            lst_output90.extend(yhat.tolist())
+            i=i+1
+            
+        else:
+            x_input = np.array(temp_input).reshape(1,-1,1)
+            yhat = model.predict(x_input)
+            #yhat = model.predict(np.expand_dims(x_input, 2))
+            temp_input.extend(yhat[0])
+            lst_output90.extend(yhat.tolist())
+            
+            i=i+1
+    next_predicted_days_value = scaler.inverse_transform(np.array(lst_output90).reshape(-1,1)).reshape(1,-1).tolist()[0]
+    plotdf90 = pd.DataFrame({'next predicted days values': next_predicted_days_value})
+    return plotdf,pd.DataFrame(next_predicted_days_value),plotdf30,plotdf60,plotdf90
+
