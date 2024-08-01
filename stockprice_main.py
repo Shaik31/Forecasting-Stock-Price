@@ -24,7 +24,8 @@ if bt:
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
     reliance=reliance.set_index('Date')
     df = reliance.copy()
-    plotdf=m.create_model(df)
+    
+    plotdf,next_predicted_days_value30,next_predicted_days_value60,next_predicted_days_value90,plotdf30,plotdf60,plotdf90= m.create_model(df)
     df.reset_index(inplace = True)
     st.title('Reliance Stock Market Prediction')
     st.write(df)
