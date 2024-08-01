@@ -1,85 +1,90 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
+#import yfinance as yf
+import datetime
 import streamlit as st
+import sys
 import model_building as m
+import pickle
 
-# Set up the Streamlit app
+
 st.markdown("# Reliance Stock Market Prediction")
+user_input = st.multiselect('Please select the stock',['RELIANCE'])
+bt = st.button('Submit') 
 
-# Initialize session state for tracking data and forecast settings
-if 'data_loaded' not in st.session_state:
-    st.session_state.data_loaded = False
-if 'forecast_days' not in st.session_state:
-    st.session_state.forecast_days = None
-if 'df' not in st.session_state:
-    st.session_state.df = None
+#adding a button
+if bt:
 
-# Function to handle button clicks and update session state
-def handle_forecast_button(days):
-    st.session_state.forecast_days = days
-
-# Load data and create the model if the Submit button is clicked
-if st.button('Submit'):
-    # Importing dataset
-    data = pd.read_csv('Relaince_stock.csv')
-    reliance = data.dropna().reset_index(drop=True)
-    reliance['Date'] = pd.to_datetime(reliance['Date'], format='%Y-%m-%d')
-    reliance = reliance.set_index('Date')
+# Importing dataset------------------------------------------------------
+    #df = yf.download('RELIANCE.NS', start=START, end=END)
+    data= pd.read_csv('Relaince_stock.csv')
+    reliance_2=data.dropna().reset_index(drop=True)
+    reliance=reliance_2.copy()
+    reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
+    reliance=reliance.set_index('Date')
     df = reliance.copy()
-
-    # Save DataFrame to session state
-    st.session_state.df = df
-
-    # Generate and display the model
-    #plotdf = m.create_model(df)
-    plotdf,next_predicted_days_value30,next_predicted_days_value60,next_predicted_days_value90,plotdf30,plotdf60,plotdf90= m.create_model(df)
-    df.reset_index(inplace=True)
-    st.session_state.data_loaded = True
-
-    # Display the data and initial plot
+    plotdf=m.create_model(df)
+    df.reset_index(inplace = True)
     st.title('Reliance Stock Market Prediction')
     st.write(df)
 
     st.markdown("### Original vs predicted close price")
-    fig = plt.figure(figsize=(20, 10))
+    fig= plt.figure(figsize=(20,10))
     sns.lineplot(data=plotdf)
     st.pyplot(fig)
 
-# Display forecast buttons if data is loaded
-if st.session_state.data_loaded:
-    st.write('Select the number of days to predict:')
-    col1, col2, col3 = st.columns(3)
 
-    with col1:
-        if st.button('30 Days'):
-            handle_forecast_button(30)
+st.write('select the days to predict')
+bt30 = st.button('30 Days')
+bt60 = st.button('60 Days')
+bt90 = st.button('90 Days')
 
-    with col2:
-        if st.button('60 Days'):
-            handle_forecast_button(60)
+elif bt30:
+    next_predicted_days_value30,plotdf30=m.create_model(df)
+    st.write('Forecast')
+    df30 = pd.DataFrame(next_predicted_days_value30)
+    st.markdown("### Next 30 days forecast")
+    df30.rename(columns={0: "Predicted Prices"}, inplace=True)
+    st.write(df30)
 
-    with col3:
-        if st.button('90 Days'):
-            handle_forecast_button(90)
+    st.markdown("Forecasted Price for 30 Days")
+    fig= plt.figure(figsize=(20,10))
+    sns.lineplot(data=plotdf30)
+    st.pyplot(fig)
+    
 
-    # Display forecast based on session state
-    if st.session_state.forecast_days and st.session_state.df is not None:
-        days = st.session_state.forecast_days
-        df = st.session_state.df  # Retrieve the DataFrame from session state
-        next_predicted_days_value, plotdf = m.create_model(df)  # Call create_model without `days`
-        
-        # Here you should handle days separately, perhaps modify `next_predicted_days_value` based on `days`
-        # e.g., filter or process `next_predicted_days_value` to get forecast for `days`
+elif bt60:
+    next_predicted_days_value60,plotdf60=m.create_model(df)
+    st.write('Forecast')
+    df60 = pd.DataFrame(next_predicted_days_value60)
+    st.markdown("### Next 30 days forecast")
+    df60.rename(columns={0: "Predicted Prices"}, inplace=True)
+    st.write(df30)
 
-        st.write(f'Forecast for {days} Days')
-        df_forecast = pd.DataFrame(next_predicted_days_value, columns=["Predicted Prices"])
-        st.write(df_forecast)
+    st.markdown("Forecasted Price for 60 Days")
+    fig= plt.figure(figsize=(20,10))
+    sns.lineplot(data=plotdf60)
+    st.pyplot(fig)
+    
 
-        st.markdown(f"Forecasted Price for {days} Days")
-        fig = plt.figure(figsize=(20, 10))
-        sns.lineplot(data=plotdf)
-        st.pyplot(fig)
+
+elif bt90:
+    next_predicted_days_value90,plotdf90=m.create_model(df)
+    st.write('Forecast')
+    df90 = pd.DataFrame(next_predicted_days_value90)
+    st.markdown("### Next 30 days forecast")
+    df90.rename(columns={0: "Predicted Prices"}, inplace=True)
+    st.write(df30)
+
+    st.markdown("Forecasted Price for 90 Days")
+    fig= plt.figure(figsize=(20,10))
+    sns.lineplot(data=plotdf90)
+    st.pyplot(fig)
+    
+else:
+    st.write('Please select days to predict')
 
 else:
-    st.write('Please click the submit button to get the EDA and Prediction.')
+    #displayed when the button is unclicked
+     st.write('Please click on the submit button to get the EDA ans Prediction')
