@@ -83,7 +83,7 @@ if bt:
     st.write(df60)
 
     st.markdown("Forecasted Price for 90 Days")
-    fig= figsize=(15,10))
+    fig= figsize=(15,10)
     fig = px.line(plotdf90)
     fig.show()
 
