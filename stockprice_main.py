@@ -48,8 +48,8 @@ if bt:
 
     st.markdown("Forecasted Price for 30 Days")
     fig= figsize=(15,10)
-    fig = px.line(plotdf30,x=plotdf30.index, y=plotdf30.columns, title='30 Days Forecast')
-    st.pyplot(fig)
+    fig = px.line(plotdf30)
+    st.potly_chart(fig)
 
 
     fulldf30 = pd.concat([dfclose,plotdf30],axis=0,ignore_index=True)
@@ -68,13 +68,13 @@ if bt:
     st.markdown("Forecasted Price for 60 Days")
     fig= figsize=(15,10)
     fig = px.line(plotdf60)
-    st.pyplot(fig)
+    st.plotly_chart(fig)
     
     fulldf60 = pd.concat([dfclose,plotdf60],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 60 days')
     fig = figsize=(15,10)
     fig = px.line(fulldf60, x=fulldf60.index, y=fulldf60.columns)
-    st.pyplot(fig)
+    st.plotly_chart(fig)
 
 
     #90 days forecast
@@ -86,13 +86,13 @@ if bt:
     st.markdown("Forecasted Price for 90 Days")
     fig= figsize=(15,10)
     fig = px.line(plotdf90)
-    st.pyplot(fig)
+    st.plotly_chart(fig)
 
     fulldf90 = pd.concat([dfclose,plotdf90],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 60 days')
     fig = figsize=(15,10)
     fig = px.line(fulldf90, x=fulldf90.index, y=fulldf90.columns)
-    st.pyplot(fig)
+    st.plotly_chart(fig)
     
 
 
