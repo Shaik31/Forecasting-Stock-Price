@@ -20,6 +20,7 @@ def create_model(df):
     pass
     scaler=MinMaxScaler(feature_range=(0,1))
     closedf=scaler.fit_transform(np.array(df['Close']).reshape(-1,1))
+    dfclose = df['Close']
 
     training_size=int(len(closedf)*0.85)
     test_size=len(closedf)-training_size
@@ -101,6 +102,7 @@ def create_model(df):
             i=i+1
     next_predicted_days_value30 = scaler.inverse_transform(np.array(lst_output30).reshape(-1,1)).reshape(1,-1).tolist()[0]
     plotdf30 = pd.DataFrame({'next predicted days values': next_predicted_days_value30})
+    fullplot = pd.concat(dfclose,plotdf30
 
     #60 days forecasting
     x_input=test_data[len(test_data)-time_step:].reshape(1,-1)
