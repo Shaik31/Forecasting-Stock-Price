@@ -34,9 +34,9 @@ if bt:
     st.write(df)
 
     st.markdown("### Original vs predicted close price")
-    fig= plt.figure(figsize=(15,8))
-    sns.lineplot(data=plotdf)
-    st.plotly_chart(fig)
+    fig= figsize=(20,10)
+    fig = px.line(plotdf)
+    fig.show()
 
     #30 days forecast
     st.write('Forecast')
@@ -54,7 +54,7 @@ if bt:
     fulldf30 = pd.concat([dfclose,plotdf30],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 30 days')
     fig = figsize=(15,10)
-    fig = px.line(fulldf, x=fulldf30.index, y=fulldf.columns)
+    fig = px.line(fulldf30, x=fulldf30.index, y=fulldf.columns)
     fig.show()
 
 
@@ -72,7 +72,7 @@ if bt:
     fulldf60 = pd.concat([dfclose,plotdf60],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 60 days')
     fig = figsize=(15,10)
-    fig = px.line(fulldf, x=fulldf60.index, y=fulldf.columns)
+    fig = px.line(fulldf60, x=fulldf60.index, y=fulldf.columns)
     fig.show()
 
 
@@ -90,7 +90,7 @@ if bt:
     fulldf60 = pd.concat([dfclose,plotdf90],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 60 days')
     fig = figsize=(15,10)
-    fig = px.line(fulldf, x=fulldf90.index, y=fulldf.columns)
+    fig = px.line(fulldf90, x=fulldf90.index, y=fulldf.columns)
     fig.show()
     
 
