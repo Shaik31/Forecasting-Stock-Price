@@ -55,7 +55,7 @@ if bt:
     fulldf30 = pd.concat([dfclose,plotdf30],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 30 days')
     fig = figsize=(15,10)
-    fig = px.line(fulldf30, x=fulldf30.index, y=fulldf.columns)
+    fig = px.line(fulldf30, x=fulldf30.index, y=fulldf30.columns)
     fig.show()
 
 
@@ -73,7 +73,7 @@ if bt:
     fulldf60 = pd.concat([dfclose,plotdf60],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 60 days')
     fig = figsize=(15,10)
-    fig = px.line(fulldf60, x=fulldf60.index, y=fulldf.columns)
+    fig = px.line(fulldf60, x=fulldf60.index, y=fulldf60.columns)
     fig.show()
 
 
@@ -91,7 +91,7 @@ if bt:
     fulldf60 = pd.concat([dfclose,plotdf90],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 60 days')
     fig = figsize=(15,10)
-    fig = px.line(fulldf90, x=fulldf90.index, y=fulldf.columns)
+    fig = px.line(fulldf90, x=fulldf90.index, y=fulldf90.columns)
     fig.show()
     
 
