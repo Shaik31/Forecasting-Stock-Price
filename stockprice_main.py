@@ -49,14 +49,14 @@ if bt:
     st.markdown("Forecasted Price for 30 Days")
     fig= figsize=(15,10)
     fig = px.line(plotdf30)
-    st.potly_chart(fig)
+    st.plotly_chart(fig)
 
 
     fulldf30 = pd.concat([dfclose,plotdf30],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 30 days')
     fig = figsize=(15,10)
     fig = px.line(fulldf30, x=fulldf30.index, y=fulldf30.columns)
-    st.pyplot(fig)
+    st.plotly_chart(fig)
 
 
     #60 days forecast
