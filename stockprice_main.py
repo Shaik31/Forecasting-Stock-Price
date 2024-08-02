@@ -88,7 +88,7 @@ if bt:
     fig = px.line(plotdf90)
     fig.show()
 
-    fulldf60 = pd.concat([dfclose,plotdf90],axis=0,ignore_index=True)
+    fulldf90 = pd.concat([dfclose,plotdf90],axis=0,ignore_index=True)
     st.write('Original Close Price and Forecasted 60 days')
     fig = figsize=(15,10)
     fig = px.line(fulldf90, x=fulldf90.index, y=fulldf90.columns)
