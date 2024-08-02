@@ -45,7 +45,7 @@ def create_model(df):
     model.add(Dense(1))
     optimizer = tf.keras.optimizers.Adam()
     model.compile(loss='mean_squared_error',optimizer=optimizer)
-    model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=5,batch_size=32,verbose=1)
+    model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=1,batch_size=52,verbose=1)
 
     ### Lets Do the prediction and check performance metrics
     train_predict=model.predict(X_train)
