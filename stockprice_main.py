@@ -34,8 +34,8 @@ if bt:
     st.write(df)
 
     st.markdown("### Original vs predicted close price")
-    fig= figsize=(20,10)
-    fig = px.line(plotdf)
+    fig= figure(figsize=(20,10))
+    fig = sns.lineplot(plotdf)
     fig.show()
 
     #30 days forecast
