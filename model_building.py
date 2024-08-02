@@ -102,7 +102,6 @@ def create_model(df):
             i=i+1
     next_predicted_days_value30 = scaler.inverse_transform(np.array(lst_output30).reshape(-1,1)).reshape(1,-1).tolist()[0]
     plotdf30 = pd.DataFrame({'next predicted days values': next_predicted_days_value30})
-    fullplot = pd.concat(dfclose,plotdf30
 
     #60 days forecasting
     x_input=test_data[len(test_data)-time_step:].reshape(1,-1)
