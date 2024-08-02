@@ -36,7 +36,7 @@ if bt:
     st.markdown("### Original vs predicted close price")
     fig = plt. figure(figsize=(20,10))
     sns.lineplot(data=plotdf)
-    st.plotlychart(fig)
+    st.pyplot(fig)
     
 
     #30 days forecast
