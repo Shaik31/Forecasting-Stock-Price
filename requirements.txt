@@ -9,5 +9,4 @@ plotly
 tqdm
 streamlit
 nbformat
-plotly.express
 -e .
