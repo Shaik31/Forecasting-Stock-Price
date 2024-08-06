@@ -10,7 +10,7 @@ import pickle
 import plotly
 import plotly.express as px
 
-st.markdown("# Reliance Stock Market Prediction")
+st.markdown("# Reliance Stock Price Prediction")
 user_input = st.multiselect('Please select the stock',['RELIANCE'])
 bt = st.button('Submit') 
 
@@ -81,7 +81,7 @@ if bt:
     df90 = pd.DataFrame(next_predicted_days_value90)
     st.markdown("### Next 90 days forecast")
     df90.rename(columns={0: "Predicted Prices"}, inplace=True)
-    st.write(df60)
+    st.write(df90)
 
     st.markdown("Forecasted Price for 90 Days")
     fig= figsize=(15,10)
